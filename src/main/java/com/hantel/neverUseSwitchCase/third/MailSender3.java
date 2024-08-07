@@ -21,6 +21,11 @@ public class MailSender3 {
      * on the program run (see MailGenerator3)
      */
     public void register(String mailCode, MailGenerator3 mailGenerator) {
+        MailGenerator3 existedGenerator =  map.get(mailCode);
+        if (existedGenerator != null) {
+            throw new IllegalArgumentException(String.format("There are duplicated codes: %s and %s",
+                    existedGenerator.getClass().getSimpleName(), mailGenerator.getClass().getSimpleName()));
+        }
         map.put(mailCode, mailGenerator);
     }
 
